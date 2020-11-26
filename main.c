@@ -25,34 +25,12 @@ int main(void) {
   double errStdDev;
   double * errStdDevPtr = &errStdDev;
 
-  FILE* text = fopen("health_data.txt", "r");
+  FILE* text = fopen("traindata.txt", "r");
   if(text == NULL) {
     printf("Unable to open data file.");
     return 1;
   }
 
-  printf("******************************************************************************\n");
-  printf("*                                                                            *\n");
-  printf("* Title: Multiple Linear Regression                                          *\n");
-  printf("* Description:  This program takes an inputted data file and performs        *\n");
-  printf("*               multiple linear regression analysis on the data.             *\n");
-  printf("* Author:       Oscar Zealley                                                *\n");
-  printf("* Instructions: Put your data in a .txt file in the same directory as        *\n");
-  printf("*               this program. Data must be formatted like this:              *\n");
-  printf("*                                                                            *\n");
-  printf("*  Dependent Variable, Independent Variable 1, Indendent Variable 2,...      *\n");
-  printf("*                   4,                      5,                    8,...      *\n");
-  printf("*                   7,                     12,                    5,...      *\n");
-  printf("*                   .                       .                     .          *\n");
-  printf("*                   .                       .                     .          *\n");
-  printf("*                                                                            *\n");
-  printf("* NB: Max number of variables is 10.                                         *\n");
-  printf("*                                                                            *\n");
-  printf("* Press enter to see a demonstration using sample data.                      *\n");
-  printf("*                                                                            *\n");
-  printf("******************************************************************************\n");
-  
-  getchar();
 
   double * data = readData(text, numVarPtr, sampleSizePtr, varNames);
   coefficientMetrics = (double*)malloc(sizeof(double) * 6 * (numVar));
@@ -296,11 +274,17 @@ void printModel(char varNames[10][25], double modelMetrics[17], double * coeffic
   /*
   *Print equation
   */
+  FILE *eq;
+  eq = fopen("eq.txt","w");
   printf("\nRegression Equation:\n%s = %.2lf ", varNames[0], coefficientMetrics[numVar * 6 - 6]);
+  fprintf(eq, "%.2lf ",coefficientMetrics[numVar*6 - 6] );
   for(i = 0; i < numVar - 1; i++) {
     printf("%+.2lf %s ",coefficientMetrics[6 *i], varNames[i+1]);
+    fprintf(eq, "%+.2lf ",coefficientMetrics[6 *i] );
   }
   printf("\n");
+  fprintf(eq, "\n");
+  fclose(eq);
   i = 0;
 
   /*

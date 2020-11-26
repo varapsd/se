@@ -147,9 +147,15 @@ int main()
 		wtcount[dset] = wts;
 		printf("%d %d %lf\n",rds,wts,min );
 	}
+	FILE *ptr1;
+	ptr1 = fopen("traindata.txt","w");
+	fprintf(ptr1, "threads,read,write\n");
 	for(int i=0;i<10;i++)
 	{
 		printf("%d,%d,%d\n",thcount[i],rdcount[i],wtcount[i]);
+		fprintf(ptr1,"%d,%d,%d\n",thcount[i],rdcount[i],wtcount[i]);
 	}
+	fclose(ptr);
+	fclose(ptr1);
 
 }
