@@ -4,7 +4,7 @@
 <p> $ gcc progam1.c -fopenmp -o data</p>
 <p> $ ./data </p>
 <p> Now a new dataset is created for the multiple regression. Now run the multipule regression to get the equation to find the number of best threads for the transaction set</p>
-<p> $ gcc main.c -Wal dist.c matrix.c -o train -lm </p>
+<p> $ gcc main.c -Wall dist.c matrix.c -o train -lm </p>
 <p> $ ./train </p>
 <p> Now the system is ready for and the program.c file will execute the system with any transaction dataset by calculating the threads required from the multiple regression.</p>
 <p> $ gcc program.c </p>
